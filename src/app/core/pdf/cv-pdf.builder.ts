@@ -226,12 +226,17 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
   });
 
   // ---------- skills ----------
+  // Languages are the last row of the skills table (saves a section heading).
   section('Skills');
   const labelW = 34;
-  cv.skills.groups.forEach(group => {
+  const skillRows = [
+    ...cv.skills.groups.map(g => ({ name: g.name, text: g.items.join(', ') })),
+    { name: 'Languages', text: cv.languages.map(l => `${l.language} (${l.fluency})`).join(', ') },
+  ];
+  skillRows.forEach(group => {
     const size = opt.compact ? 9 : 9.5;
     font(size);
-    const lines: string[] = doc.splitTextToSize(group.items.join(', '), CONTENT_W - labelW);
+    const lines: string[] = doc.splitTextToSize(group.text, CONTENT_W - labelW);
     const lh = size * LH;
     ensure(lh * lines.length);
     font(size, 'bold');
@@ -264,10 +269,6 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
       y += 0.6;
     });
   }
-
-  // ---------- languages ----------
-  section('Languages');
-  paragraph(cv.languages.map(l => `${l.language} (${l.fluency})`).join('   ·   '), opt.compact ? 9 : 9.5);
 
   // ---------- page footer ----------
   const pages = doc.getNumberOfPages();

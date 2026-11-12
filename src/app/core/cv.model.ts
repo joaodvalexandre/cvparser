@@ -23,6 +23,8 @@ export interface Basics {
   email: string;
   /** May contain `{{years}}`, replaced with the computed years of experience. */
   summary: string;
+  /** `YYYY-MM` the professional career started; "years of experience" = whole years since this date. */
+  careerStart: string;
   availability: string;
   profiles: Profile[];
 }
@@ -50,7 +52,7 @@ export interface Language {
 export interface Experience {
   company: string;
   position: string;
-  /** Internships are excluded from the one-page resume and from years-of-experience. */
+  /** Internships are excluded from the one-page resume. */
   internship?: boolean;
   start: string;
   end: string | null;

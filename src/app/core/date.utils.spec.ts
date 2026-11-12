@@ -1,4 +1,4 @@
-import { formatDuration, formatMonth, formatRange, monthsBetween, totalMonths } from './date.utils';
+import { formatDuration, formatMonth, formatRange, monthsBetween } from './date.utils';
 
 describe('date utils', () => {
   const now = new Date('2026-11-12');
@@ -20,18 +20,4 @@ describe('date utils', () => {
     expect(formatDuration(30)).toBe('2 yrs 6 mos');
   });
 
-  it('merges overlapping ranges', () => {
-    expect(totalMonths([], now)).toBe(0);
-    expect(totalMonths([{ start: '2020-01', end: '2020-12' }], now)).toBe(12);
-    expect(
-      totalMonths(
-        [
-          { start: '2020-01', end: '2020-06' },
-          { start: '2020-06', end: '2020-12' }, // overlaps by one month
-          { start: '2022-01', end: '2022-03' },
-        ],
-        now,
-      ),
-    ).toBe(15);
-  });
 });

@@ -38,30 +38,6 @@ export function formatDuration(months: number): string {
   return parts.join(' ') || '1 mo';
 }
 
-/**
- * Total distinct months covered by a set of ranges (overlaps are counted once).
- */
-export function totalMonths(ranges: { start: string; end: string | null }[], now: Date = new Date()): number {
-  const sorted = ranges
-    .map(r => [toMonthIndex(r.start, now), toMonthIndex(r.end, now)] as const)
-    .sort((a, b) => a[0] - b[0]);
-
-  if (!sorted.length) return 0;
-
-  let total = 0;
-  let [curStart, curEnd] = sorted[0];
-  for (const [s, e] of sorted.slice(1)) {
-    if (s > curEnd) {
-      total += curEnd - curStart + 1;
-      curStart = s;
-      curEnd = e;
-    } else {
-      curEnd = Math.max(curEnd, e);
-    }
-  }
-  return total + (curEnd - curStart + 1);
-}
-
 /** `2026-10-29T17:05:57Z` -> `2 weeks ago` */
 export function timeAgo(iso: string, now: Date = new Date()): string {
   const seconds = Math.round((now.getTime() - new Date(iso).getTime()) / 1000);

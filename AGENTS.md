@@ -13,7 +13,7 @@ All content comes from one JSON file (`src/assets/CV.json`). Visitors can:
 - download a **one-page resume** or a **full CV** as PDF (generated in the browser),
 - get in touch (Contact page, with copy-to-clipboard for email and phone).
 
-Live site: https://cv-parser-nu.vercel.app (Vercel; see *Deployment*).
+Live site: https://cv-parser-joao-alexandres-projects.vercel.app (Vercel; see *Deployment*).
 
 ## Commands
 
@@ -32,7 +32,7 @@ On Windows, if Karma can't find Chrome, set `CHROME_BIN="C:/Program Files/Google
 - SSR + build-time **prerendering** of `/home`, `/projects`, `/contact`, `/404` with **client hydration** (`provideClientHydration(withEventReplay())`).
 - Router: `withViewTransitions()` (route animations through the View Transitions API) and `withInMemoryScrolling` (scroll to top, anchor support).
 - `HttpClient` with `withFetch()`.
-- **jsPDF** (lazy-loaded) for PDFs. **bootstrap-icons** (icon font, imported once in `styles.css`).
+- **jsPDF** (lazy-loaded) for PDFs. **@vercel/analytics** (`inject()` in `main.ts`). **bootstrap-icons** (icon font, imported once in `styles.css`).
 - Plain CSS with design tokens. No Bootstrap/Tailwind/Material.
 - Fonts (Google Fonts, in `index.html`): Inter (body), Space Grotesk (headings), JetBrains Mono (labels).
 
@@ -53,7 +53,7 @@ src/
     core/
       cv.model.ts            TypeScript interfaces for CV.json
       cv.data.ts             `CV` typed constant (the compiler validates the JSON) + yearsOfExperience(), summary()
-      date.utils.ts          YYYY-MM parsing/formatting, durations, overlap-aware month totals, timeAgo
+      date.utils.ts          YYYY-MM parsing/formatting, durations, timeAgo
       github.service.ts      GitHub repos (signal state, sessionStorage cache, filtering) + LANGUAGE_COLORS
       theme.service.ts       light/dark toggle (data-theme on <html>, persisted in localStorage)
       pdf/cv-pdf.builder.ts  framework-free jsPDF layout for 'cv' and 'resume'
@@ -70,9 +70,9 @@ src/
 Edit **only** `src/assets/CV.json`. The pages and both PDFs update automatically.
 
 - Dates are `"YYYY-MM"`; `"end": null` means *Present* (the role is shown as "Current").
-- `basics.summary` may contain `{{years}}`, which is replaced with whole years of **non-internship** experience
-  (overlapping roles are counted once). Don't hard-code the number.
-- `experience[].internship: true` hides the role from the one-page resume and from the years count.
+- `basics.summary` may contain `{{years}}`, replaced with whole years since `basics.careerStart` (`"2018-08"`).
+  It is also used for the "years of experience" stat in the hero. Don't hard-code the number.
+- `experience[].internship: true` hides the role from the one-page resume.
 - `experience[].highlights` are bullet points (keep them to one sentence each). `tools` render as chips.
 - `skills.top` → progress bars (`level` 1–10); `skills.groups` → chip groups and PDF skills table; `skills.soft` → "Strengths".
 - `basics.profiles[].icon` is a Bootstrap Icons name without the `bi-` prefix (`linkedin`, `github`, …).
@@ -127,8 +127,21 @@ Edit **only** `src/assets/CV.json`. The pages and both PDFs update automatically
 
 ## Deployment
 
-- The repo's GitHub "homepage" points to **Vercel** (`cv-parser-nu.vercel.app`), which builds with `ng build` and
-  serves the prerendered output. There is no `vercel.json`; Vercel's Angular preset is used.
+- **Vercel** project `joao-alexandres-projects/cv-parser`. Every push to `master` deploys to production at
+  https://cv-parser-joao-alexandres-projects.vercel.app. Vercel runs `ng build` and serves the prerendered static output.
+  - The old alias `cv-parser-nu.vercel.app` (still set as the GitHub repo "homepage") returns `DEPLOYMENT_NOT_FOUND`.
+- `vercel.json` rewrites every path that isn't a static file to `/index.csr.html`, so non-prerendered URLs
+  (`/about`, `/portfolio`, typos) boot the app and the Angular router handles redirects and the 404 page.
+  Static files and prerendered pages take priority over the rewrite.
+
+### Analytics
+- `src/main.ts` calls `inject()` from `@vercel/analytics` (the framework-agnostic API; there is no Angular-specific
+  package). It runs in the browser only. Client-side navigations are tracked automatically because the script hooks
+  `history.pushState`. In dev mode (`ng serve`) it only logs to the console.
+- `PdfDownloadService` sends a custom event `PDF Download` with `{ variant: 'cv' | 'resume' }`. Custom events only
+  show up on Vercel plans that include them; page views work on every plan.
+- Analytics must be **enabled in the Vercel dashboard** (Project → Analytics); until then
+  `/_vercel/insights/script.js` returns 404 and nothing is collected.
 - `.github/workflows/jekyll-gh-pages.yml` and `static.yml` are **leftovers** from a GitHub Pages setup (the Jekyll
   one runs on every push to `master` and builds the raw repo, not the Angular app). There is no `gh-pages` branch.
   They can probably be deleted. Confirm the Pages settings first.

@@ -2,7 +2,7 @@
 
 My personal CV and portfolio site, built with Angular 22. All content is driven by a single JSON file.
 
-**Live:** https://cv-parser-nu.vercel.app
+**Live:** https://cv-parser-joao-alexandres-projects.vercel.app
 
 ## Features
 
@@ -10,7 +10,7 @@ My personal CV and portfolio site, built with Angular 22. All content is driven 
 - **Download as PDF**: a one-page resume or the full CV, generated in the browser
 - **Projects** pulled live from my public GitHub repositories (language, description, stars, links)
 - Light / dark theme, scroll and route animations (respects reduced-motion), responsive down to small phones
-- Prerendered for fast first load and SEO
+- Prerendered for fast first load and SEO, with Vercel Analytics
 
 ## Getting started
 

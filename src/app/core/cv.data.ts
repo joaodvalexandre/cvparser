@@ -1,13 +1,13 @@
 import data from '../../assets/CV.json';
 import { Cv } from './cv.model';
-import { totalMonths } from './date.utils';
+import { toMonthIndex } from './date.utils';
 
 /** Typed CV data. Assigning to `Cv` makes the compiler validate CV.json. */
 export const CV: Cv = data;
 
-/** Whole years of non-internship experience (overlapping roles counted once). */
+/** Whole years elapsed since `basics.careerStart` (e.g. Aug 2018 -> Nov 2026 = 8). */
 export function yearsOfExperience(cv: Cv = CV, now: Date = new Date()): number {
-  return Math.floor(totalMonths(cv.experience.filter(e => !e.internship), now) / 12);
+  return Math.floor((toMonthIndex(null, now) - toMonthIndex(cv.basics.careerStart, now)) / 12);
 }
 
 /** Summary with `{{years}}` filled in. */

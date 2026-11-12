@@ -6,9 +6,10 @@ import { buildCvPdf, pdfFileName } from './pdf/cv-pdf.builder';
 describe('CV data', () => {
   const now = new Date('2026-11-12');
 
-  it('computes years of experience excluding internships', () => {
-    expect(yearsOfExperience(CV, now)).toBe(7);
-    expect(summary(CV, now)).toContain('7+ years');
+  it('counts whole years since careerStart', () => {
+    expect(yearsOfExperience(CV, now)).toBe(8);
+    expect(yearsOfExperience(CV, new Date('2026-07-15'))).toBe(7); // ticks over in August
+    expect(summary(CV, now)).toContain('8+ years');
     expect(summary(CV, now)).not.toContain('{{');
   });
 

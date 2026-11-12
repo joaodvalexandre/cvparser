@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { track } from '@vercel/analytics';
 import { CV } from '../cv.data';
 import type { PdfVariant } from './cv-pdf.builder';
 
@@ -22,6 +23,8 @@ export class PdfDownloadService {
         import('./cv-pdf.builder'),
       ]);
       buildCvPdf(jsPDF, CV, variant).save(pdfFileName(CV, variant));
+      // Custom event (Vercel Analytics; only recorded on plans that include custom events).
+      track('PDF Download', { variant });
     } catch (err) {
       console.error('PDF generation failed', err);
       this.error.set('Could not generate the PDF. Please try again.');

@@ -3,7 +3,7 @@
     "name": "João Alexandre",
     "label": "Full-Stack PHP Developer",
     "picture": "/assets/pic.jpg",
-    "location": "Lisbon, Portugal",
+    "location": "Leiria, Portugal",
     "phone": "+351 962 370 926",
     "email": "joao.daniel.alexandre43@gmail.com",
     "summary": "Full-Stack PHP Developer with {{years}}+ years of professional experience building, maintaining and improving business-oriented web applications. I work end-to-end across PHP (Laravel, CodeIgniter), JavaScript, SQL and responsive frontends, from database design and backend APIs to internal tools, automation, testing and deployment. I pick up unfamiliar codebases and technologies quickly, care about reliability and maintainability, and work closely with both technical and business stakeholders.",

@@ -2,20 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CVParser</title>
+  <title>João Alexandre – Full-Stack PHP Developer</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="João Alexandre – Full-Stack PHP Developer based in Lisbon. Experience, skills, projects and a downloadable CV.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f8f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1110" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="João Alexandre – Full-Stack PHP Developer">
+  <meta property="og:description" content="Experience, skills, projects and a downloadable CV.">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-  crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Metrophobic&display=swap" rel="stylesheet">
-  <!-- href="/node_modules/bootstrap/dist/css/bootstrap.min.css" -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="preconnect" href="https://api.github.com" crossorigin>
+  <script>
+    // Apply the saved / system theme before first paint (see ThemeService).
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>

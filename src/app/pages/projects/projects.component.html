@@ -1,0 +1,110 @@
+<section class="section page">
+  <div class="container">
+    <header class="head">
+      <span class="eyebrow enter" style="--i: 0">Projects</span>
+      <h1 class="enter" style="--i: 1">Things I've built</h1>
+      <p class="muted enter" style="--i: 2">
+        Side projects and experiments, pulled live from my public GitHub repositories.
+      </p>
+    </header>
+
+    @switch (github.state().status) {
+      @case ('error') {
+        <div class="card empty" role="alert">
+          <i class="bi bi-cloud-slash" aria-hidden="true"></i>
+          <p>{{ errorMessage() }}</p>
+          <div class="empty-actions">
+            <button type="button" class="btn btn-ghost" (click)="github.load(true)">
+              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Try again
+            </button>
+            <a class="btn btn-primary" [href]="github.profileUrl" target="_blank" rel="noopener">
+              <i class="bi bi-github" aria-hidden="true"></i> Open GitHub
+            </a>
+          </div>
+        </div>
+      }
+
+      @case ('ready') {
+        @if (languages().length > 2) {
+          <div class="filters enter" style="--i: 3" role="group" aria-label="Filter by language">
+            @for (lang of languages(); track lang) {
+              <button
+                type="button"
+                class="filter"
+                [class.active]="filter() === lang"
+                [attr.aria-pressed]="filter() === lang"
+                (click)="filter.set(lang)">
+                @if (lang !== 'All') {
+                  <span class="dot" [style.background]="color(lang)" aria-hidden="true"></span>
+                }
+                {{ lang }}
+              </button>
+            }
+          </div>
+        }
+
+        <div class="grid">
+          @for (repo of visible(); track repo.name; let i = $index) {
+            <article class="card repo" appReveal [style.--i]="i % 3">
+              <a class="stretched" [href]="repo.url" target="_blank" rel="noopener" [attr.aria-label]="'Open ' + repo.name + ' on GitHub'"></a>
+              <header>
+                <i class="bi bi-journal-code repo-icon" aria-hidden="true"></i>
+                <h2>{{ title(repo.name) }}</h2>
+                <i class="bi bi-arrow-up-right go" aria-hidden="true"></i>
+              </header>
+              <p class="desc" [class.none]="!repo.description">{{ repo.description || 'No description yet.' }}</p>
+
+              @if (repo.topics.length) {
+                <div class="topics">
+                  @for (t of repo.topics.slice(0, 4); track t) {
+                    <span class="chip chip-accent">{{ t }}</span>
+                  }
+                </div>
+              }
+
+              <footer>
+                @if (repo.language) {
+                  <span class="lang"><span class="dot" [style.background]="color(repo.language)" aria-hidden="true"></span>{{ repo.language }}</span>
+                }
+                @if (repo.stars) {
+                  <span title="Stars"><i class="bi bi-star" aria-hidden="true"></i> {{ repo.stars }}</span>
+                }
+                @if (repo.forks) {
+                  <span title="Forks"><i class="bi bi-diagram-2" aria-hidden="true"></i> {{ repo.forks }}</span>
+                }
+                <span class="updated">Updated {{ ago(repo.pushedAt) }}</span>
+              </footer>
+
+              @if (repo.homepage) {
+                <a class="live" [href]="repo.homepage" target="_blank" rel="noopener">
+                  <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Live demo
+                </a>
+              }
+            </article>
+          } @empty {
+            <p class="muted">No public repositories to show yet.</p>
+          }
+        </div>
+
+        <div class="more">
+          <a class="btn btn-ghost" [href]="github.profileUrl" target="_blank" rel="noopener">
+            <i class="bi bi-github" aria-hidden="true"></i> See everything on GitHub
+          </a>
+        </div>
+      }
+
+      @default {
+        <div class="grid" aria-busy="true" aria-label="Loading projects">
+          @for (s of skeletons; track s) {
+            <div class="card repo skeleton" [style.--i]="s">
+              <span class="sk sk-title"></span>
+              <span class="sk sk-line"></span>
+              <span class="sk sk-line short"></span>
+              <span class="sk sk-foot"></span>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</section>

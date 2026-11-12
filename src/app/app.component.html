@@ -1,5 +1,6 @@
-<app-navbar (scrollToTopEvent)="handleScrollToTop()"></app-navbar>
-<main [@routeAnimations]="prepareRoute(outlet)">
-    <router-outlet #outlet="outlet" />
+<button type="button" class="skip-link" (click)="skipToContent()">Skip to content</button>
+<app-navbar />
+<main id="main" tabindex="-1" #main>
+  <router-outlet />
 </main>
-<app-footer></app-footer>
+<app-footer />

@@ -1,0 +1,229 @@
+:host {
+  display: block;
+}
+
+.page {
+  padding-top: clamp(40px, 7vw, 72px);
+}
+
+.head {
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
+.head h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+
+.filter:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.filter.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 16px;
+}
+
+.repo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  min-height: 190px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.repo:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+
+/* Whole card is clickable; inner links sit above it. */
+.stretched {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.repo header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.repo-icon {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+.repo h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: 1.1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.go {
+  color: var(--muted);
+  transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.repo:hover .go {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+.desc {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.desc.none {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.repo footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.updated {
+  margin-left: auto;
+}
+
+.live {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.live:hover {
+  text-decoration: underline;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+/* ---- empty / error ---- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.empty > i {
+  font-size: 2.2rem;
+  color: var(--muted);
+}
+
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* ---- skeleton ---- */
+.skeleton {
+  pointer-events: none;
+}
+
+.sk {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-2) 25%, color-mix(in srgb, var(--surface-2) 40%, var(--surface)) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.sk-title { height: 20px; width: 55%; }
+.sk-line { height: 12px; width: 100%; }
+.sk-line.short { width: 70%; }
+.sk-foot { height: 12px; width: 40%; margin-top: auto; }
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}

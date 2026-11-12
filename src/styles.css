@@ -1,21 +1,356 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* =========================================================================
+   Design tokens. Every component uses these; change the palette here.
+   ========================================================================= */
+:root {
+  --bg: #f7f8f7;
+  --surface: #ffffff;
+  --surface-2: #eef2f0;
+  --text: #14181b;
+  --muted: #5b6670;
+  --border: #e1e6e3;
+  --accent: #0b8a63;
+  --accent-strong: #08714f;
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, transparent);
+  --on-accent: #ffffff;
+  --glow: #55d6aa;
+  --shadow-sm: 0 1px 2px rgb(16 24 20 / 0.05);
+  --shadow: 0 1px 2px rgb(16 24 20 / 0.04), 0 10px 30px -12px rgb(16 24 20 / 0.12);
+  --shadow-lg: 0 2px 4px rgb(16 24 20 / 0.04), 0 24px 48px -16px rgb(16 24 20 / 0.2);
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", var(--font-sans);
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --container: 1120px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --nav-h: 64px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b100f;
+    --surface: #111917;
+    --surface-2: #17211e;
+    --text: #e6edea;
+    --muted: #93a29c;
+    --border: #22302b;
+    --accent: #55d6aa;
+    --accent-strong: #84e6c3;
+    --accent-soft: color-mix(in srgb, var(--accent) 13%, transparent);
+    --on-accent: #04130d;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -12px rgb(0 0 0 / 0.5);
+    --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 48px -16px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b100f;
+  --surface: #111917;
+  --surface-2: #17211e;
+  --text: #e6edea;
+  --muted: #93a29c;
+  --border: #22302b;
+  --accent: #55d6aa;
+  --accent-strong: #84e6c3;
+  --accent-soft: color-mix(in srgb, var(--accent) 13%, transparent);
+  --on-accent: #04130d;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 30px -12px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 48px -16px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+/* =========================================================================
+   Base
+   ========================================================================= */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 16px);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-    font-family: "Metrophobic", sans-serif;
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--glow) 40%, transparent);
+}
+
+/* =========================================================================
+   Layout helpers
+   ========================================================================= */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(56px, 9vw, 104px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* =========================================================================
+   Components
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s var(--ease), background-color 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 6px 20px -8px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+  box-shadow: 0 10px 28px -10px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
+.btn-ghost {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  color: var(--accent);
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+}
+
+.btn-icon:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.chip-accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: transparent;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================================
+   Motion
+   ========================================================================= */
+
+/* Scroll reveal (RevealDirective). Children with --i stagger. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Page load entrance (hero etc.). */
+.enter {
+  animation: enter 0.8s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* Route changes use the View Transitions API (provideRouter(withViewTransitions())). */
+::view-transition-old(root) {
+  animation: vt-out 0.18s var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: vt-in 0.38s var(--ease) both;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }

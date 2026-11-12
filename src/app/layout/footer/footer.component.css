@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  padding-block: 28px 20px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.9rem;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.social {
+  display: flex;
+  gap: 4px;
+}
+
+.social i {
+  font-size: 1.15rem;
+}
+
+.legal {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  font-size: 0.82rem;
+}
+
+.legal a {
+  color: var(--muted);
+  transition: color 0.2s var(--ease);
+}
+
+.legal a:hover {
+  color: var(--accent);
+}

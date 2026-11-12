@@ -1,182 +1,187 @@
 {
-  "information": {
+  "basics": {
     "name": "João Alexandre",
+    "label": "Full-Stack PHP Developer",
     "picture": "/assets/pic.jpg",
-    "current_position": "Web Developer",
-    "main_position": "Full-Stack PHP Developer",
-    "location": "Lisbon, Portugal (Hybrid)",
-    "contact": "+351 962 370 926",
+    "location": "Lisbon, Portugal",
+    "phone": "+351 962 370 926",
     "email": "joao.daniel.alexandre43@gmail.com",
-    "description": "Full-Stack PHP Developer with 7+ years of professional experience (2018–present) building, maintaining, and improving business-oriented web applications. Specialized in PHP, Laravel, CodeIgniter, JavaScript, SQL, MySQL, responsive frontend development, backend APIs, database-driven systems, internal tools, automation, testing, and application deployment. Experienced in owning features end-to-end, learning unfamiliar technologies quickly, improving reliability and maintainability, and collaborating with technical and business stakeholders. Strong adaptability across backend and frontend stacks, including PHP/Laravel, CodeIgniter, JavaScript, C#, Python, and SQL. Open to remote or hybrid Full-Stack PHP, Laravel, Backend, and Web Developer opportunities.",
-    "soft_skills": [
-      {
-        "skill": "Adaptability",
-        "description": "Quickly learns unfamiliar technologies and codebases, including Python for backend application maintenance and C# for game-related projects."
-      },
-      {
-        "skill": "Problem-solving",
-        "description": "Analyses complex issues, identifies root causes, and implements practical, maintainable solutions."
-      },
-      {
-        "skill": "Critical thinking",
-        "description": "Evaluates technical and product trade-offs before selecting an implementation approach."
-      },
-      {
-        "skill": "Ownership",
-        "description": "Takes features from requirements and design through implementation, testing, documentation, and deployment."
-      },
-      {
-        "skill": "Communication",
-        "description": "Explains technical work to developers, business teams, clients, and other stakeholders."
-      }
-    ],
-    "skills": [
-      "PHP",
-      "Laravel",
-      "CodeIgniter",
-      "Lumen",
-      "CakePHP",
-      "Yii",
-      "Drupal",
-      "JavaScript",
-      "TypeScript",
-      "jQuery",
-      "HTML5",
-      "CSS3",
-      "Tailwind CSS",
-      "Livewire",
-      "Responsive Web Design",
-      "Frontend Development",
-      "Backend Development",
-      "Full-Stack Development",
-      "REST APIs",
-      "JSON",
-      "SQL",
-      "MySQL",
-      "Microsoft SQL Server",
-      "SQLite",
-      "Database Design",
-      "Query Optimization",
-      "Python",
-      "C#",
-      "Java",
-      "Git",
-      "GitLab",
-      "GitHub",
-      "Behat",
-      "Automated Testing",
-      "Manual Testing",
-      "Technical Documentation",
-      "Application Deployment",
-      "Windows Server",
-      "XAMPP",
-      "Microsoft SharePoint",
-      "Microsoft Teams",
-      "Scrum",
-      "Agile Development",
-      "Game Development",
-      "Node.js"
-    ],
-    "top5_skills": [
-      {"skill": "PHP", "level": 8},
-      {"skill": "Laravel", "level": 8},
-      {"skill": "JavaScript", "level": 8},
-      {"skill": "HTML5/CSS3", "level": 8},
-      {"skill": "SQL/MySQL", "level": 7}
-    ],
-    "languages": [
-      {"language": "Portuguese", "level": "Native / Bilingual"},
-      {"language": "English", "level": "Native / Bilingual"}
-    ],
-    "url": [
-      {"name": "LinkedIn", "link": "https://www.linkedin.com/in/joaodvalexandre/"},
-      {"name": "GitHub", "link": "https://github.com/joaodvalexandre"}
+    "summary": "Full-Stack PHP Developer with {{years}}+ years of professional experience building, maintaining and improving business-oriented web applications. I work end-to-end across PHP (Laravel, CodeIgniter), JavaScript, SQL and responsive frontends, from database design and backend APIs to internal tools, automation, testing and deployment. I pick up unfamiliar codebases and technologies quickly, care about reliability and maintainability, and work closely with both technical and business stakeholders.",
+    "availability": "Open to remote or hybrid Full-Stack PHP, Laravel, Backend and Web Developer roles.",
+    "profiles": [
+      { "network": "LinkedIn", "username": "joaodvalexandre", "url": "https://www.linkedin.com/in/joaodvalexandre/", "icon": "linkedin" },
+      { "network": "GitHub", "username": "joaodvalexandre", "url": "https://github.com/joaodvalexandre", "icon": "github" }
     ]
   },
-  "experiences": [
+  "skills": {
+    "top": [
+      { "name": "PHP", "level": 8 },
+      { "name": "Laravel", "level": 8 },
+      { "name": "JavaScript", "level": 8 },
+      { "name": "HTML5 / CSS3", "level": 8 },
+      { "name": "SQL / MySQL", "level": 7 }
+    ],
+    "groups": [
+      {
+        "name": "Backend",
+        "items": ["PHP", "Laravel", "CodeIgniter", "Lumen", "CakePHP", "Yii", "Drupal", "REST APIs", "Node.js", "Python", "C#", "Java"]
+      },
+      {
+        "name": "Frontend",
+        "items": ["JavaScript", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Livewire", "jQuery", "Responsive design"]
+      },
+      {
+        "name": "Data",
+        "items": ["SQL", "MySQL", "Microsoft SQL Server", "SQLite", "Database design", "Query optimization", "JSON"]
+      },
+      {
+        "name": "Testing & Delivery",
+        "items": ["Git", "GitHub", "GitLab", "Behat", "Automated testing", "Manual testing", "Application deployment", "Windows Server", "XAMPP", "Technical documentation"]
+      },
+      {
+        "name": "Ways of working",
+        "items": ["Scrum", "Agile", "Microsoft SharePoint", "Microsoft Teams", "Game development"]
+      }
+    ],
+    "soft": [
+      { "name": "Adaptability", "description": "Quickly learns unfamiliar technologies and codebases, including Python for backend maintenance and C# for game projects." },
+      { "name": "Problem-solving", "description": "Analyses complex issues, finds the root cause, and ships practical, maintainable fixes." },
+      { "name": "Critical thinking", "description": "Weighs technical and product trade-offs before choosing an implementation." },
+      { "name": "Ownership", "description": "Takes features from requirements and design through implementation, testing, documentation and deployment." },
+      { "name": "Communication", "description": "Explains technical work clearly to developers, business teams, clients and other stakeholders." }
+    ]
+  },
+  "languages": [
+    { "language": "Portuguese", "fluency": "Native / Bilingual" },
+    { "language": "English", "fluency": "Native / Bilingual" }
+  ],
+  "experience": [
     {
-      "company_name": "ACIN",
+      "company": "ACIN",
       "position": "Web Developer",
-      "start_date": "05/2026",
-      "end_date": "Present",
+      "start": "2026-05",
+      "end": null,
       "location": "Lisbon, Portugal",
-      "description": "Full-stack development on the acingov web application, working on both backend and frontend features. Developing and maintaining business-oriented web applications using PHP, CodeIgniter, JavaScript, SQL, and related web technologies. Contributing across backend APIs, database design, frontend interfaces, and application support.",
-      "tools_used": ["PHP", "CodeIgniter", "JavaScript", "HTML", "CSS", "SQL", "MySQL", "Git"]
+      "highlights": [
+        "Full-stack development on the acingov web application, delivering both backend and frontend features.",
+        "Develop and maintain business-oriented web applications with PHP, CodeIgniter, JavaScript and SQL.",
+        "Contribute across backend APIs, database design, frontend interfaces and application support."
+      ],
+      "tools": ["PHP", "CodeIgniter", "JavaScript", "HTML", "CSS", "SQL", "MySQL", "Git"]
     },
     {
-      "company_name": "Grupel S.A.",
+      "company": "Grupel S.A.",
       "position": "Business Developer",
-      "start_date": "11/2024",
-      "end_date": "04/2025",
+      "start": "2024-11",
+      "end": "2025-04",
       "location": "Vagos, Portugal",
-      "description": "Designed and developed a full-featured Laravel web application for vehicle requisition and internal fleet management. Automated workflows, centralized operational data, and improved asset tracking. Developed a procurement and purchasing management tool in parallel, focusing on scalability, security, maintainability, and administrative usability.",
-      "tools_used": ["PHP", "Laravel", "Livewire", "Tailwind CSS", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL"]
+      "highlights": [
+        "Designed and built a full-featured Laravel application for vehicle requisition and internal fleet management.",
+        "Automated workflows, centralized operational data and improved asset tracking.",
+        "Developed a procurement and purchasing management tool in parallel, focused on scalability, security, maintainability and administrative usability."
+      ],
+      "tools": ["PHP", "Laravel", "Livewire", "Tailwind CSS", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL"]
     },
     {
-      "company_name": "RedOcean",
+      "company": "RedOcean",
       "position": "PHP Web Developer",
-      "start_date": "04/2024",
-      "end_date": "11/2024",
+      "start": "2024-04",
+      "end": "2024-11",
       "location": "Portugal",
-      "description": "Developed and continuously improved web applications used by local councils and public-sector organizations. Implemented features across the full stack and contributed to application performance, reliability, usability, and maintainability improvements using PHP, Laravel, Yii, JavaScript, SQL, HTML, and CSS.",
-      "tools_used": ["PHP", "Laravel", "Yii", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL", "Git"]
+      "highlights": [
+        "Developed and continuously improved web applications used by local councils and public-sector organizations.",
+        "Implemented features across the full stack with PHP, Laravel, Yii, JavaScript and SQL.",
+        "Improved application performance, reliability, usability and maintainability."
+      ],
+      "tools": ["PHP", "Laravel", "Yii", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL", "Git"]
     },
     {
-      "company_name": "Synopsys Inc.",
+      "company": "Synopsys Inc.",
       "position": "Frontend Developer",
-      "start_date": "08/2022",
-      "end_date": "02/2024",
+      "start": "2022-08",
+      "end": "2024-02",
       "location": "Porto Salvo, Portugal",
-      "description": "Developed new consulting and data-driven web pages using native HTML, CSS, JavaScript, and jQuery. Refactored frontend code to improve readability, performance, and long-term maintainability. Implemented search and filtering functionality for data tables and improved how users consulted information. Supported backend development by using Python to execute SQL queries and return JSON data to frontend components. Created technical documentation for client-facing web pages.",
-      "tools_used": ["HTML5", "CSS3", "JavaScript", "jQuery", "SQL", "Python", "JSON", "Microsoft Office"]
+      "highlights": [
+        "Built new consulting and data-driven web pages with native HTML, CSS, JavaScript and jQuery.",
+        "Refactored frontend code to improve readability, performance and long-term maintainability.",
+        "Implemented search and filtering for data tables, improving how users consult information.",
+        "Supported the backend by using Python to run SQL queries and return JSON to frontend components.",
+        "Wrote technical documentation for client-facing web pages."
+      ],
+      "tools": ["HTML5", "CSS3", "JavaScript", "jQuery", "SQL", "Python", "JSON", "Microsoft Office"]
     },
     {
-      "company_name": "NTT DATA Services",
+      "company": "NTT DATA Services",
       "position": "Assistant Consultant",
-      "start_date": "02/2021",
-      "end_date": "08/2022",
+      "start": "2021-02",
+      "end": "2022-08",
       "location": "Lisbon, Portugal",
-      "description": "Contributed to the development of an internal Drupal website for EDP to manage and present corporate news. Developed and maintained SharePoint pages integrated with Microsoft Teams to support an internal virtual community. Created multimedia content and onboarding materials. Implemented automated test scenarios using Behat, performed manual testing, updated technical documentation in Confluence, and prepared monthly stakeholder presentations.",
-      "tools_used": ["PHP", "Drupal", "Behat", "SharePoint", "Microsoft Teams", "Confluence", "Microsoft Office", "Adobe Premiere Pro"]
+      "highlights": [
+        "Contributed to an internal Drupal website for EDP to manage and publish corporate news.",
+        "Developed and maintained SharePoint pages integrated with Microsoft Teams for an internal virtual community.",
+        "Implemented automated test scenarios with Behat and performed manual testing.",
+        "Maintained technical documentation in Confluence, created onboarding materials and prepared monthly stakeholder presentations."
+      ],
+      "tools": ["PHP", "Drupal", "Behat", "SharePoint", "Microsoft Teams", "Confluence", "Microsoft Office", "Adobe Premiere Pro"]
     },
     {
-      "company_name": "Eugster Frismag AG",
+      "company": "Eugster Frismag AG",
       "position": "Full-Stack Developer",
-      "start_date": "08/2018",
-      "end_date": "01/2021",
+      "start": "2018-08",
+      "end": "2021-01",
       "location": "Torres Vedras, Portugal",
-      "description": "Developed and maintained internal web applications used in production environments. Implemented features, improved existing software, and responded to application incidents. Configured a Windows server environment, including XAMPP, and improved deployment workflows using Git and SourceTree. Delivered training sessions and technical presentations for development and business application teams. Worked with PHP frameworks, JavaScript, SQL Server, MySQL, HTML, CSS, and Git.",
-      "tools_used": ["PHP", "Laravel", "Lumen", "CakePHP", "JavaScript", "jQuery", "HTML", "CSS", "Microsoft SQL Server", "MySQL", "Git", "SourceTree", "XAMPP", "Windows Server", "Visual Studio Code"]
+      "highlights": [
+        "Developed and maintained internal web applications used in production environments.",
+        "Implemented new features, improved existing software and responded to application incidents.",
+        "Configured a Windows Server environment (XAMPP) and improved deployment workflows with Git and SourceTree.",
+        "Delivered training sessions and technical presentations for development and business teams."
+      ],
+      "tools": ["PHP", "Laravel", "Lumen", "CakePHP", "JavaScript", "jQuery", "HTML", "CSS", "Microsoft SQL Server", "MySQL", "Git", "SourceTree", "XAMPP", "Windows Server"]
     },
     {
-      "company_name": "Suntransfers.com",
-      "position": "Intern Full-Stack Developer",
-      "start_date": "05/2017",
-      "end_date": "07/2017",
+      "company": "Suntransfers.com",
+      "position": "Full-Stack Developer Intern",
+      "internship": true,
+      "start": "2017-05",
+      "end": "2017-07",
       "location": "Barcelona, Spain",
-      "description": "Completed an Erasmus internship developing new functionality and maintaining internal administrative web applications and public-facing web platforms. Worked with Yii, Behat, and Twig while gaining experience in an international development environment.",
-      "tools_used": ["Yii", "Behat", "Twig", "PHP", "HTML", "CSS"]
+      "highlights": [
+        "Erasmus internship building new functionality for internal admin tools and public-facing web platforms.",
+        "Worked with Yii, Behat and Twig in an international development team."
+      ],
+      "tools": ["PHP", "Yii", "Behat", "Twig", "HTML", "CSS"]
     },
     {
-      "company_name": "Eugster Frismag AG",
-      "position": "Intern Full-Stack Developer",
-      "start_date": "05/2016",
-      "end_date": "07/2016",
+      "company": "Eugster Frismag AG",
+      "position": "Full-Stack Developer Intern",
+      "internship": true,
+      "start": "2016-05",
+      "end": "2016-07",
       "location": "Torres Vedras, Portugal",
-      "description": "Completed a software development internship and gained practical experience with CakePHP, PHP, JavaScript, HTML, CSS, jQuery, and NetBeans. Strong performance during the internship led to a full-time employment offer after completing the course.",
-      "tools_used": ["CakePHP", "PHP", "JavaScript", "HTML", "CSS", "jQuery", "NetBeans"]
+      "highlights": [
+        "Gained hands-on experience with CakePHP, PHP, JavaScript, jQuery, HTML and CSS.",
+        "Strong performance led to a full-time offer after finishing the course."
+      ],
+      "tools": ["PHP", "CakePHP", "JavaScript", "jQuery", "HTML", "CSS", "NetBeans"]
     }
   ],
   "education": [
     {
-      "school_name": "Henriques Nogueira School",
-      "course": "Programming of Informatic Systems",
-      "position": "Technical Student",
-      "start_date": "09/2014",
-      "end_date": "07/2018",
-      "school_year": "12",
-      "final_grade": "14/20",
-      "description": "Four-year technical secondary education program focused on software development, programming, databases, and web technologies. Studied Java, PHP, JavaScript, HTML, CSS, SQL, and SQLite. Completed a final project consisting of a game developed with C# scripts."
+      "institution": "Henriques Nogueira School",
+      "area": "Programming of Computer Systems",
+      "studyType": "Technical secondary education",
+      "start": "2014-09",
+      "end": "2018-07",
+      "grade": "14/20",
+      "highlights": [
+        "Software development, programming, databases and web technologies: Java, PHP, JavaScript, HTML, CSS, SQL and SQLite.",
+        "Final project: a game built with C# scripts."
+      ]
     }
-  ]
+  ],
+  "github": {
+    "username": "joaodvalexandre",
+    "includeForks": false,
+    "exclude": []
+  }
 }

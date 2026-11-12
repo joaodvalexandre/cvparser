@@ -1,36 +1,26 @@
 import { Routes } from '@angular/router';
-import { CVJoaoComponent } from './cvjoao/cvjoao.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PortfolioComponent } from './cvjoao/portfolio/portfolio.component';
-import { AboutComponent } from './cvjoao/about/about.component';
-import { ContactsComponent } from './cvjoao/contacts/contacts.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+
+const NAME = 'João Alexandre';
 
 export const routes: Routes = [
-    { 
-        path: 'home', 
-        component: CVJoaoComponent,
-        title: 'João Alexandre - Home',
-        data: {animation: 'home'}
-    },
-    {
-        path: 'portfolio',
-        component: PortfolioComponent,
-        title: 'João Alexandre - Portfolio',
-        data: {animation: 'portfolio'}
-    },
-    {
-        path: 'contacts',
-        component: ContactsComponent,
-        title: 'João Alexandre - Contacts',
-        data: {animation: 'contacts'}
-    },
-    {
-        path: 'about',
-        component: AboutComponent,
-        title: 'João Alexandre - About',
-        data: {animation: 'about'}
-    },
-    { path: '404', component: PageNotFoundComponent, title: "Error 404" },
-    { path: '',   redirectTo: '/home', pathMatch: 'full' },
-    { path: '**',   redirectTo: '/404', pathMatch: 'full' }
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: 'home', component: HomeComponent, title: `${NAME} – Full-Stack PHP Developer` },
+  {
+    path: 'projects',
+    loadComponent: () => import('./pages/projects/projects.component').then(m => m.ProjectsComponent),
+    title: `Projects – ${NAME}`,
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent),
+    title: `Contact – ${NAME}`,
+  },
+  // Old URLs kept working.
+  { path: 'portfolio', redirectTo: 'projects' },
+  { path: 'contacts', redirectTo: 'contact' },
+  { path: 'about', redirectTo: 'home' },
+  { path: '404', component: NotFoundComponent, title: `Page not found – ${NAME}` },
+  { path: '**', redirectTo: '404' },
 ];

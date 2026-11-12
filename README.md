@@ -1,17 +1,27 @@
-### CVParser
-Angular Page to parse a CV JSON File format
+# CVParser
 
-### What is the purpose of this?
-This is to present myself, with a beautiful webpage fully created using Angular 17.
+My personal CV and portfolio site, built with Angular 22. All content is driven by a single JSON file.
 
-### How to start the project up?
-In order to begin the project up, you need to first and foremost, clone the project to a folder of your choosing.
-Then, after cloning, start by going into the folder, and typing into the command line:
-  ```sh
-  npm install 
-  ```
-Once it finishes installing all the modules, then you can start the project up, by running:
-  ```sh
-  ng serve
-  ```
-If you want to open the page after it starts, simply add the command ```--open``` at the end.
+**Live:** https://cv-parser-nu.vercel.app
+
+## Features
+
+- CV page with an experience timeline, skills and education, all generated from [`src/assets/CV.json`](src/assets/CV.json)
+- **Download as PDF**: a one-page resume or the full CV, generated in the browser
+- **Projects** pulled live from my public GitHub repositories (language, description, stars, links)
+- Light / dark theme, scroll and route animations (respects reduced-motion), responsive down to small phones
+- Prerendered for fast first load and SEO
+
+## Getting started
+
+```sh
+npm install
+npm start          # http://localhost:4200
+npm run build      # production build -> dist/cvparser/browser
+npx ng test --watch=false --browsers=ChromeHeadless
+```
+
+## Updating the CV
+
+Edit `src/assets/CV.json`. The site and both PDFs update automatically. See [AGENTS.md](AGENTS.md) for the
+field reference, architecture and conventions.

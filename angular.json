@@ -28,6 +28,16 @@
               "src/styles.css"
             ],
             "scripts": [],
+            "allowedCommonJsDependencies": [
+              "jspdf",
+              "canvg",
+              "core-js",
+              "dompurify",
+              "fflate",
+              "html2canvas",
+              "raf",
+              "rgbcolor"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -80,8 +90,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": [
-              "zone.js",
-              "zone.js/testing"
+              "zone.js"
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [

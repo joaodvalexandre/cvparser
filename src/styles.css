@@ -293,6 +293,14 @@ button {
   transform: none;
 }
 
+/* Animated elements become stacking contexts, so later siblings would paint over an open
+   download menu. Lift any animated container that holds one above its siblings. */
+.enter:has(app-download-menu),
+.reveal:has(app-download-menu) {
+  position: relative;
+  z-index: 20;
+}
+
 /* Page load entrance (hero etc.). */
 .enter {
   animation: enter 0.8s var(--ease) both;

@@ -7,6 +7,9 @@
 main {
   flex: 1 0 auto;
   outline: none;
+  /* Elements waiting to slide in sit off to the side; never let them cause horizontal scroll.
+     (`clip`, unlike `hidden`, doesn't create a scroll container, so sticky/anchors keep working.) */
+  overflow-x: clip;
 }
 
 .skip-link {

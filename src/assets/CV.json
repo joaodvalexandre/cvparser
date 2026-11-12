@@ -45,11 +45,11 @@
       },
       {
         "name": "Ways of working",
-        "items": ["Scrum", "Agile", "Microsoft SharePoint", "Microsoft Teams", "Game development"]
+        "items": ["Scrum", "Agile", "Microsoft SharePoint", "Microsoft Teams", "Unity", "Game development"]
       }
     ],
     "soft": [
-      { "name": "Adaptability", "description": "Quickly learns unfamiliar technologies and codebases, including Python for backend maintenance and C# for game projects." },
+      { "name": "Adaptability", "description": "Quickly learns unfamiliar technologies and codebases, including Python for backend maintenance and C# for Unity game projects." },
       { "name": "Problem-solving", "description": "Analyses complex issues, finds the root cause, and ships practical, maintainable fixes." },
       { "name": "Critical thinking", "description": "Weighs technical and product trade-offs before choosing an implementation." },
       { "name": "Ownership", "description": "Takes features from requirements and design through implementation, testing, documentation and deployment." },
@@ -180,7 +180,7 @@
       "grade": "14/20",
       "highlights": [
         "Software development, programming, databases and web technologies: Java, PHP, JavaScript, HTML, CSS, SQL and SQLite.",
-        "Final project: a game built with C# scripts."
+        "Final project: a Unity game, scripted in C#."
       ]
     }
   ],

@@ -35,7 +35,7 @@ export interface Repo {
 type State =
   | { status: 'idle' | 'loading' }
   | { status: 'ready'; repos: Repo[] }
-  | { status: 'error'; message: string };
+  | { status: 'error'; reason: 'rateLimit' | 'failed' };
 
 const CACHE_KEY = 'gh-repos-v1';
 const CACHE_TTL_MS = 15 * 60 * 1000;
@@ -76,12 +76,7 @@ export class GithubService {
       this.state.set({ status: 'ready', repos });
     } catch (err: unknown) {
       const status = (err as { status?: number })?.status;
-      this.state.set({
-        status: 'error',
-        message: status === 403 || status === 429
-          ? 'GitHub rate limit reached. Try again in a few minutes.'
-          : 'Could not load projects from GitHub.',
-      });
+      this.state.set({ status: 'error', reason: status === 403 || status === 429 ? 'rateLimit' : 'failed' });
     }
   }
 }

@@ -1,15 +1,15 @@
 <footer>
   <div class="container inner">
     <div class="left">
-      <a routerLink="/home" class="name">{{ basics.name }}</a>
-      <span class="muted">{{ basics.label }} · {{ basics.location }}</span>
+      <a [routerLink]="i18n.link('/home')" class="name">{{ basics().name }}</a>
+      <span class="muted">{{ basics().label }} · {{ basics().location }}</span>
     </div>
 
     <div class="social">
-      <a class="btn btn-icon" href="mailto:{{ basics.email }}" aria-label="Email">
+      <a class="btn btn-icon" href="mailto:{{ basics().email }}" [attr.aria-label]="i18n.t().contact.email">
         <i class="bi bi-envelope" aria-hidden="true"></i>
       </a>
-      @for (p of basics.profiles; track p.url) {
+      @for (p of basics().profiles; track p.url) {
         <a class="btn btn-icon" [href]="p.url" target="_blank" rel="noopener" [attr.aria-label]="p.network">
           <i class="bi bi-{{ p.icon }}" aria-hidden="true"></i>
         </a>
@@ -18,8 +18,8 @@
   </div>
   <div class="container">
     <div class="legal muted">
-      <span>© {{ year }} {{ basics.name }}</span>
-      <a [href]="sourceUrl" target="_blank" rel="noopener">Built with Angular · view source</a>
+      <span>© {{ year }} {{ basics().name }}</span>
+      <a [href]="sourceUrl" target="_blank" rel="noopener">{{ i18n.t().footer.source }}</a>
     </div>
   </div>
 </footer>

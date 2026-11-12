@@ -1,9 +1,9 @@
 <section class="container wrap">
   <p class="code" aria-hidden="true"><span>4</span><span>0</span><span>4</span></p>
-  <h1 class="enter" style="--i: 3">This page doesn't exist</h1>
-  <p class="muted enter" style="--i: 4">The link may be old or mistyped. Let's get you back on track.</p>
+  <h1 class="enter" style="--i: 3">{{ t.title }}</h1>
+  <p class="muted enter" style="--i: 4">{{ t.text }}</p>
   <div class="actions enter" style="--i: 5">
-    <a routerLink="/home" class="btn btn-primary"><i class="bi bi-house" aria-hidden="true"></i> Back home</a>
-    <a routerLink="/projects" class="btn btn-ghost">See projects</a>
+    <a [routerLink]="i18n.link('/home')" class="btn btn-primary"><i class="bi bi-house" aria-hidden="true"></i> {{ t.home }}</a>
+    <a [routerLink]="i18n.link('/projects')" class="btn btn-ghost">{{ t.projects }}</a>
   </div>
 </section>

@@ -2,6 +2,7 @@ import type { jsPDF as JsPdf } from 'jspdf';
 import { Cv, Experience } from '../cv.model';
 import { formatRange } from '../date.utils';
 import { summary } from '../cv.data';
+import { Lang, STRINGS } from '../i18n';
 
 /**
  * Framework-free PDF layout for the CV / resume, built on jsPDF's standard Helvetica font
@@ -34,9 +35,9 @@ interface Options {
   compact: boolean;
 }
 
-export function buildCvPdf(JsPdfClass: JsPdfCtor, cv: Cv, variant: PdfVariant, now: Date = new Date()): JsPdf {
+export function buildCvPdf(JsPdfClass: JsPdfCtor, cv: Cv, variant: PdfVariant, lang: Lang = 'en', now: Date = new Date()): JsPdf {
   if (variant === 'cv') {
-    return render(JsPdfClass, cv, now, {
+    return render(JsPdfClass, cv, lang, now, {
       maxHighlights: Infinity,
       showTools: true,
       showInternships: true,
@@ -46,7 +47,7 @@ export function buildCvPdf(JsPdfClass: JsPdfCtor, cv: Cv, variant: PdfVariant, n
   }
   // Resume: shrink until it fits on one page.
   for (const maxHighlights of [3, 2, 1, 0]) {
-    const doc = render(JsPdfClass, cv, now, {
+    const doc = render(JsPdfClass, cv, lang, now, {
       maxHighlights,
       showTools: false,
       showInternships: false,
@@ -60,18 +61,21 @@ export function buildCvPdf(JsPdfClass: JsPdfCtor, cv: Cv, variant: PdfVariant, n
   throw new Error('unreachable');
 }
 
-export function pdfFileName(cv: Cv, variant: PdfVariant): string {
+export function pdfFileName(cv: Cv, variant: PdfVariant, lang: Lang = 'en'): string {
   const ascii = cv.basics.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, '-');
-  return `${ascii}-${variant === 'cv' ? 'CV' : 'Resume'}.pdf`;
+  const t = STRINGS[lang].pdf;
+  const suffix = lang === 'en' ? '' : `-${lang.toUpperCase()}`;
+  return `${ascii}-${variant === 'cv' ? t.fileCv : t.fileResume}${variant === 'cv' ? suffix : ''}.pdf`;
 }
 
-function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
+function render(JsPdfClass: JsPdfCtor, cv: Cv, lang: Lang, now: Date, opt: Options): JsPdf {
+  const t = STRINGS[lang].pdf;
   const doc = new JsPdfClass({ unit: 'mm', format: 'a4' });
   const { basics } = cv;
   let y = PAGE.margin;
 
   doc.setProperties({
-    title: `${basics.name} – ${opt.compact ? 'Resume' : 'CV'}`,
+    title: `${basics.name} – ${opt.compact ? t.resume : t.cv}`,
     author: basics.name,
     subject: basics.label,
     creator: basics.name,
@@ -186,7 +190,7 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
   y += contactLh;
 
   // ---------- profile ----------
-  section('Profile');
+  section(t.profile);
   paragraph(summary(cv, now), opt.compact ? 9.5 : 10);
   if (!opt.compact && basics.availability) {
     y += 1;
@@ -194,13 +198,13 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
   }
 
   // ---------- experience ----------
-  section('Experience');
+  section(t.experience);
   const roles = cv.experience.filter(e => opt.showInternships || !e.internship);
   roles.forEach((role: Experience, i) => {
     if (i > 0) y += opt.compact ? 2.2 : 3.2;
     ensure(16);
     const title = opt.compact ? `${role.position}, ${role.company}` : role.position;
-    row(title, formatRange(role.start, role.end), 10.5);
+    row(title, formatRange(role.start, role.end, lang), 10.5);
     if (!opt.compact) {
       paragraph(`${role.company}  ·  ${role.location}`, 9.5, PAGE.margin, CONTENT_W, COLOR.muted);
     }
@@ -208,16 +212,16 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
     role.highlights.slice(0, opt.maxHighlights).forEach(h => bullet(h, opt.compact ? 9 : 9.5));
     if (opt.showTools && role.tools.length) {
       y += 0.6;
-      paragraph(`Tools: ${role.tools.join(', ')}`, 8.5, PAGE.margin + 4, CONTENT_W - 4, COLOR.muted);
+      paragraph(`${t.tools}: ${role.tools.join(', ')}`, 8.5, PAGE.margin + 4, CONTENT_W - 4, COLOR.muted);
     }
   });
 
   // ---------- education ----------
-  section('Education');
+  section(t.education);
   cv.education.forEach((ed, i) => {
     if (i > 0) y += 3;
-    row(`${ed.area}, ${ed.institution}`, formatRange(ed.start, ed.end), 10.5);
-    const meta = [ed.studyType, ed.grade ? `Final grade ${ed.grade}` : ''].filter(Boolean).join('  ·  ');
+    row(`${ed.area}, ${ed.institution}`, formatRange(ed.start, ed.end, lang), 10.5);
+    const meta = [ed.studyType, ed.grade ? `${t.finalGrade} ${ed.grade}` : ''].filter(Boolean).join('  ·  ');
     paragraph(meta, 9.5, PAGE.margin, CONTENT_W, COLOR.muted);
     if (!opt.compact) {
       y += 0.8;
@@ -227,11 +231,11 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
 
   // ---------- skills ----------
   // Languages are the last row of the skills table (saves a section heading).
-  section('Skills');
+  section(t.skills);
   const labelW = 34;
   const skillRows = [
     ...cv.skills.groups.map(g => ({ name: g.name, text: g.items.join(', ') })),
-    { name: 'Languages', text: cv.languages.map(l => `${l.language} (${l.fluency})`).join(', ') },
+    { name: t.languages, text: cv.languages.map(l => `${l.language} (${l.fluency})`).join(', ') },
   ];
   skillRows.forEach(group => {
     const size = opt.compact ? 9 : 9.5;
@@ -248,7 +252,7 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
 
   // ---------- strengths ----------
   if (opt.showStrengths && cv.skills.soft.length) {
-    section('Strengths');
+    section(t.strengths);
     cv.skills.soft.forEach(s => {
       const size = 9.5;
       font(size, 'bold');
@@ -276,7 +280,7 @@ function render(JsPdfClass: JsPdfCtor, cv: Cv, now: Date, opt: Options): JsPdf {
     for (let p = 1; p <= pages; p++) {
       doc.setPage(p);
       font(8, 'normal', COLOR.muted);
-      doc.text(`${basics.name} – CV`, PAGE.margin, PAGE.h - 9);
+      doc.text(`${basics.name} – ${t.cv}`, PAGE.margin, PAGE.h - 9);
       doc.text(`${p} / ${pages}`, PAGE.w - PAGE.margin, PAGE.h - 9, { align: 'right' });
     }
   }

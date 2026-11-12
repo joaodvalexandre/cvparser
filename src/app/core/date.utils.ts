@@ -1,4 +1,4 @@
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+import { Lang, STRINGS } from './i18n';
 
 /** Parses `YYYY-MM` into a month index (year * 12 + month0). `null` means "now". */
 export function toMonthIndex(value: string | null, now: Date = new Date()): number {
@@ -9,18 +9,19 @@ export function toMonthIndex(value: string | null, now: Date = new Date()): numb
   return year * 12 + (month - 1);
 }
 
-/** `2024-04` -> `Apr 2024`; `null` -> `Present`. */
-export function formatMonth(value: string | null): string {
+/** `2024-04` -> `Apr 2024` / `abr 2024`; `null` -> `Present` / `Presente`. */
+export function formatMonth(value: string | null, lang: Lang = 'en'): string {
+  const s = STRINGS[lang];
   if (!value) {
-    return 'Present';
+    return s.present;
   }
   const index = toMonthIndex(value);
-  return `${MONTHS[index % 12]} ${Math.floor(index / 12)}`;
+  return `${s.months[index % 12]} ${Math.floor(index / 12)}`;
 }
 
 /** `Apr 2024 – Nov 2024` */
-export function formatRange(start: string, end: string | null): string {
-  return `${formatMonth(start)} – ${formatMonth(end)}`;
+export function formatRange(start: string, end: string | null, lang: Lang = 'en'): string {
+  return `${formatMonth(start, lang)} – ${formatMonth(end, lang)}`;
 }
 
 /** Inclusive number of months between two `YYYY-MM` values. */
@@ -28,18 +29,13 @@ export function monthsBetween(start: string, end: string | null, now: Date = new
   return Math.max(1, toMonthIndex(end, now) - toMonthIndex(start, now) + 1);
 }
 
-/** `14` -> `1 yr 2 mos` */
-export function formatDuration(months: number): string {
-  const years = Math.floor(months / 12);
-  const rest = months % 12;
-  const parts: string[] = [];
-  if (years) parts.push(`${years} yr${years > 1 ? 's' : ''}`);
-  if (rest) parts.push(`${rest} mo${rest > 1 ? 's' : ''}`);
-  return parts.join(' ') || '1 mo';
+/** `14` -> `1 yr 2 mos` / `1 ano 2 meses` */
+export function formatDuration(months: number, lang: Lang = 'en'): string {
+  return STRINGS[lang].duration(Math.floor(months / 12), months % 12);
 }
 
-/** `2026-10-29T17:05:57Z` -> `2 weeks ago` */
-export function timeAgo(iso: string, now: Date = new Date()): string {
+/** `2026-10-29T17:05:57Z` -> `2 weeks ago` / `há 2 semanas` */
+export function timeAgo(iso: string, lang: Lang = 'en', now: Date = new Date()): string {
   const seconds = Math.round((now.getTime() - new Date(iso).getTime()) / 1000);
   const steps: [number, Intl.RelativeTimeFormatUnit][] = [
     [60, 'second'], [60, 'minute'], [24, 'hour'], [7, 'day'], [4.345, 'week'], [12, 'month'], [Infinity, 'year'],
@@ -47,7 +43,7 @@ export function timeAgo(iso: string, now: Date = new Date()): string {
   let value = seconds;
   for (const [size, unit] of steps) {
     if (Math.abs(value) < size) {
-      return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(-Math.round(value), unit);
+      return new Intl.RelativeTimeFormat(STRINGS[lang].locale, { numeric: 'auto' }).format(-Math.round(value), unit);
     }
     value /= size;
   }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CV } from '../../core/cv.data';
+import { I18nService } from '../../core/i18n.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +9,8 @@ import { CV } from '../../core/cv.data';
   styleUrl: './footer.component.css',
 })
 export class FooterComponent {
-  protected readonly basics = CV.basics;
+  protected readonly i18n = inject(I18nService);
+  protected readonly basics = computed(() => this.i18n.cv().basics);
   protected readonly year = new Date().getFullYear();
   protected readonly sourceUrl = 'https://github.com/joaodvalexandre/CVParser';
 }

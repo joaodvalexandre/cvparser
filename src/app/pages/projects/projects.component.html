@@ -1,11 +1,9 @@
 <section class="section page">
   <div class="container">
     <header class="head">
-      <span class="eyebrow enter" style="--i: 0">Projects</span>
-      <h1 class="enter" style="--i: 1">Things I've built</h1>
-      <p class="muted enter" style="--i: 2">
-        Side projects and experiments, pulled live from my public GitHub repositories.
-      </p>
+      <span class="eyebrow enter" style="--i: 0">{{ t.eyebrow }}</span>
+      <h1 class="enter" style="--i: 1">{{ t.title }}</h1>
+      <p class="muted enter" style="--i: 2">{{ t.intro }}</p>
     </header>
 
     @switch (github.state().status) {
@@ -15,18 +13,21 @@
           <p>{{ errorMessage() }}</p>
           <div class="empty-actions">
             <button type="button" class="btn btn-ghost" (click)="github.load(true)">
-              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i> Try again
+              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i> {{ t.retry }}
             </button>
             <a class="btn btn-primary" [href]="github.profileUrl" target="_blank" rel="noopener">
-              <i class="bi bi-github" aria-hidden="true"></i> Open GitHub
+              <i class="bi bi-github" aria-hidden="true"></i> {{ t.openGithub }}
             </a>
           </div>
         </div>
       }
 
       @case ('ready') {
-        @if (languages().length > 2) {
-          <div class="filters enter" style="--i: 3" role="group" aria-label="Filter by language">
+        @if (languages().length > 1) {
+          <div class="filters enter" style="--i: 3" role="group" [attr.aria-label]="t.filterLabel">
+            <button type="button" class="filter" [class.active]="filter() === null" [attr.aria-pressed]="filter() === null" (click)="filter.set(null)">
+              {{ t.all }}
+            </button>
             @for (lang of languages(); track lang) {
               <button
                 type="button"
@@ -34,9 +35,7 @@
                 [class.active]="filter() === lang"
                 [attr.aria-pressed]="filter() === lang"
                 (click)="filter.set(lang)">
-                @if (lang !== 'All') {
-                  <span class="dot" [style.background]="color(lang)" aria-hidden="true"></span>
-                }
+                <span class="dot" [style.background]="color(lang)" aria-hidden="true"></span>
                 {{ lang }}
               </button>
             }
@@ -45,19 +44,19 @@
 
         <div class="grid">
           @for (repo of visible(); track repo.name; let i = $index) {
-            <article class="card repo" appReveal [style.--i]="i % 3">
-              <a class="stretched" [href]="repo.url" target="_blank" rel="noopener" [attr.aria-label]="'Open ' + repo.name + ' on GitHub'"></a>
+            <article class="card repo" appReveal="right" [style.--i]="i % 3">
+              <a class="stretched" [href]="repo.url" target="_blank" rel="noopener" [attr.aria-label]="t.open(repo.name)"></a>
               <header>
                 <i class="bi bi-journal-code repo-icon" aria-hidden="true"></i>
                 <h2>{{ title(repo.name) }}</h2>
                 <i class="bi bi-arrow-up-right go" aria-hidden="true"></i>
               </header>
-              <p class="desc" [class.none]="!repo.description">{{ repo.description || 'No description yet.' }}</p>
+              <p class="desc" [class.none]="!repo.description">{{ repo.description || t.noDescription }}</p>
 
               @if (repo.topics.length) {
                 <div class="topics">
-                  @for (t of repo.topics.slice(0, 4); track t) {
-                    <span class="chip chip-accent">{{ t }}</span>
+                  @for (topic of repo.topics.slice(0, 4); track topic) {
+                    <span class="chip chip-accent">{{ topic }}</span>
                   }
                 </div>
               }
@@ -67,34 +66,34 @@
                   <span class="lang"><span class="dot" [style.background]="color(repo.language)" aria-hidden="true"></span>{{ repo.language }}</span>
                 }
                 @if (repo.stars) {
-                  <span title="Stars"><i class="bi bi-star" aria-hidden="true"></i> {{ repo.stars }}</span>
+                  <span [title]="t.stars"><i class="bi bi-star" aria-hidden="true"></i> {{ repo.stars }}</span>
                 }
                 @if (repo.forks) {
-                  <span title="Forks"><i class="bi bi-diagram-2" aria-hidden="true"></i> {{ repo.forks }}</span>
+                  <span [title]="t.forks"><i class="bi bi-diagram-2" aria-hidden="true"></i> {{ repo.forks }}</span>
                 }
-                <span class="updated">Updated {{ ago(repo.pushedAt) }}</span>
+                <span class="updated">{{ t.updated(ago(repo.pushedAt)) }}</span>
               </footer>
 
               @if (repo.homepage) {
                 <a class="live" [href]="repo.homepage" target="_blank" rel="noopener">
-                  <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Live demo
+                  <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> {{ t.liveDemo }}
                 </a>
               }
             </article>
           } @empty {
-            <p class="muted">No public repositories to show yet.</p>
+            <p class="muted">{{ t.empty }}</p>
           }
         </div>
 
         <div class="more">
           <a class="btn btn-ghost" [href]="github.profileUrl" target="_blank" rel="noopener">
-            <i class="bi bi-github" aria-hidden="true"></i> See everything on GitHub
+            <i class="bi bi-github" aria-hidden="true"></i> {{ t.seeAll }}
           </a>
         </div>
       }
 
       @default {
-        <div class="grid" aria-busy="true" aria-label="Loading projects">
+        <div class="grid" aria-busy="true" [attr.aria-label]="t.loading">
           @for (s of skeletons; track s) {
             <div class="card repo skeleton" [style.--i]="s">
               <span class="sk sk-title"></span>

@@ -1,13 +1,13 @@
 <header>
   <div class="container bar">
-    <a routerLink="/home" class="brand" aria-label="{{ name }}, home">
+    <a [routerLink]="i18n.link('/home')" class="brand" [attr.aria-label]="i18n.t().nav.homeLabel(name)">
       <span class="mono" aria-hidden="true">{{ initials }}</span>
       <span class="brand-name">{{ name }}</span>
     </a>
 
-    <nav id="site-nav" [class.open]="menuOpen()" aria-label="Main">
+    <nav id="site-nav" [class.open]="menuOpen()" [attr.aria-label]="i18n.t().nav.main">
       <ul>
-        @for (link of links; track link.path) {
+        @for (link of links(); track link.path) {
           <li>
             <a [routerLink]="link.path" routerLinkActive="active" ariaCurrentWhenActive="page">{{ link.label }}</a>
           </li>
@@ -16,11 +16,22 @@
     </nav>
 
     <div class="actions">
+      <div class="lang" role="group" [attr.aria-label]="i18n.t().nav.language">
+        @for (l of languages(); track l.lang) {
+          <a
+            [routerLink]="l.url"
+            [class.active]="l.active"
+            [attr.aria-current]="l.active ? 'true' : null"
+            [attr.hreflang]="l.lang"
+            [attr.lang]="l.lang"
+            (click)="chooseLanguage(l.lang)">{{ l.lang.toUpperCase() }}</a>
+        }
+      </div>
       <button
         type="button"
         class="btn btn-icon theme-toggle"
         (click)="theme.toggle()"
-        [attr.aria-label]="theme.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'">
+        [attr.aria-label]="theme.theme() === 'dark' ? i18n.t().nav.toLight : i18n.t().nav.toDark">
         <!-- Both icons rendered; CSS picks one from [data-theme] so SSR/hydration stay in sync. -->
         <i class="bi bi-moon-stars icon-moon" aria-hidden="true"></i>
         <i class="bi bi-sun icon-sun" aria-hidden="true"></i>
@@ -32,7 +43,7 @@
         (click)="menuOpen.set(!menuOpen())"
         [attr.aria-expanded]="menuOpen()"
         aria-controls="site-nav"
-        aria-label="Toggle navigation">
+        [attr.aria-label]="i18n.t().nav.toggleMenu">
         <span class="burger" [class.x]="menuOpen()" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
     </div>

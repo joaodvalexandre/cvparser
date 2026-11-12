@@ -11,22 +11,19 @@
       @if (current) {
         <p class="status enter" style="--i: 0">
           <span class="pulse" aria-hidden="true"></span>
-          {{ current.position }} at {{ current.company }}
+          {{ t.home.status(current.position, current.company) }}
         </p>
       }
       <h1 class="enter" style="--i: 1">
-        Hi, I'm <span class="name">{{ basics.name }}</span>
+        {{ t.home.greeting }} <span class="name">{{ basics.name }}</span>
       </h1>
       <p class="role enter" style="--i: 2">{{ basics.label }}</p>
-      <p class="lead enter" style="--i: 3">
-        I build and maintain business web applications end-to-end: PHP &amp; Laravel backends, SQL databases and
-        responsive JavaScript frontends.
-      </p>
+      <p class="lead enter" style="--i: 3">{{ t.home.lead }}</p>
 
       <div class="cta enter" style="--i: 4">
         <app-download-menu />
-        <a routerLink="/projects" class="btn btn-ghost">
-          <i class="bi bi-code-slash" aria-hidden="true"></i> View projects
+        <a [routerLink]="i18n.link('/projects')" class="btn btn-ghost">
+          <i class="bi bi-code-slash" aria-hidden="true"></i> {{ t.home.viewProjects }}
         </a>
       </div>
 
@@ -58,21 +55,23 @@
     </dl>
   </div>
 
-  <a routerLink="/home" fragment="about" class="scroll-hint" aria-label="Scroll to about"><i class="bi bi-arrow-down" aria-hidden="true"></i></a>
+  <a [routerLink]="i18n.link('/home')" fragment="about" class="scroll-hint" [attr.aria-label]="t.home.scrollToAbout">
+    <i class="bi bi-arrow-down" aria-hidden="true"></i>
+  </a>
 </section>
 
 <!-- ============ ABOUT ============ -->
 <section id="about" class="section">
   <div class="container about">
     <div appReveal>
-      <span class="eyebrow">About</span>
-      <h2 class="section-title">About me</h2>
+      <span class="eyebrow">{{ t.home.about.eyebrow }}</span>
+      <h2 class="section-title">{{ t.home.about.title }}</h2>
     </div>
     <div class="about-body">
-      <p class="summary" appReveal>{{ summary }}</p>
-      <div class="about-side" appReveal style="--i: 1">
+      <p class="summary" appReveal style="--i: 1">{{ summary }}</p>
+      <div class="about-side" appReveal="right" style="--i: 2">
         <div class="card side-card">
-          <h3>Languages</h3>
+          <h3>{{ t.home.about.languages }}</h3>
           <ul>
             @for (l of cv.languages; track l.language) {
               <li><span>{{ l.language }}</span><span class="muted">{{ l.fluency }}</span></li>
@@ -92,15 +91,15 @@
 <section id="skills" class="section alt">
   <div class="container">
     <div appReveal>
-      <span class="eyebrow">Skills</span>
-      <h2 class="section-title">Skills &amp; tools</h2>
+      <span class="eyebrow">{{ t.home.skills.eyebrow }}</span>
+      <h2 class="section-title">{{ t.home.skills.title }}</h2>
     </div>
 
     <div class="skills-grid">
       <div class="card top-skills" appReveal>
-        <h3>Core stack</h3>
+        <h3>{{ t.home.skills.core }}</h3>
         @for (s of cv.skills.top; track s.name; let i = $index) {
-          <div class="bar-row" [style.--i]="i">
+          <div class="bar-row" [style.--bar-i]="i">
             <div class="bar-label"><span>{{ s.name }}</span><span class="muted">{{ s.level }}/10</span></div>
             <div class="bar" role="meter" [attr.aria-valuenow]="s.level" aria-valuemin="0" aria-valuemax="10" [attr.aria-label]="s.name">
               <span class="fill" [style.--level]="s.level / 10"></span>
@@ -111,7 +110,7 @@
 
       <div class="groups">
         @for (g of cv.skills.groups; track g.name; let i = $index) {
-          <div class="group" appReveal [style.--i]="i">
+          <div class="group" appReveal="right" [style.--i]="i">
             <h3>{{ g.name }}</h3>
             <div class="chips">
               @for (item of g.items; track item) {
@@ -123,10 +122,10 @@
       </div>
     </div>
 
-    <h3 class="soft-title" appReveal>Strengths</h3>
+    <h3 class="soft-title" appReveal>{{ t.home.skills.strengths }}</h3>
     <div class="soft-grid">
       @for (s of cv.skills.soft; track s.name; let i = $index) {
-        <article class="card soft" appReveal [style.--i]="i">
+        <article class="card soft" appReveal="right" [style.--i]="i">
           <h4>{{ s.name }}</h4>
           <p class="muted">{{ s.description }}</p>
         </article>
@@ -139,28 +138,29 @@
 <section id="experience" class="section">
   <div class="container">
     <div appReveal>
-      <span class="eyebrow">Experience</span>
-      <h2 class="section-title">Where I've worked</h2>
+      <span class="eyebrow">{{ t.home.experience.eyebrow }}</span>
+      <h2 class="section-title">{{ t.home.experience.title }}</h2>
     </div>
 
+    <!-- The dots and connecting line stay put; dates and cards slide in (cards alternate sides). -->
     <ol class="timeline">
-      @for (job of experience; track job.company + job.start) {
-        <li class="tl-item" appReveal [class.current]="!job.end">
-          <div class="tl-when">
+      @for (job of experience; track job.company + job.start; let even = $even) {
+        <li class="tl-item" [class.current]="!job.end">
+          <div class="tl-when" appReveal>
             <span class="range">{{ job.range }}</span>
             <span class="muted duration">{{ job.duration }}</span>
           </div>
           <span class="tl-dot" aria-hidden="true"></span>
-          <article class="card tl-card">
+          <article class="card tl-card" [appReveal]="even ? 'right' : 'left'">
             <header>
               <div>
                 <h3>{{ job.position }}</h3>
                 <p class="company">{{ job.company }} <span class="muted">· {{ job.location }}</span></p>
               </div>
               @if (!job.end) {
-                <span class="chip chip-accent">Current</span>
+                <span class="chip chip-accent">{{ t.home.experience.current }}</span>
               } @else if (job.internship) {
-                <span class="chip">Internship</span>
+                <span class="chip">{{ t.home.experience.internship }}</span>
               }
             </header>
             <ul class="highlights">
@@ -169,8 +169,8 @@
               }
             </ul>
             <div class="chips">
-              @for (t of job.tools; track t) {
-                <span class="chip">{{ t }}</span>
+              @for (tool of job.tools; track tool) {
+                <span class="chip">{{ tool }}</span>
               }
             </div>
           </article>
@@ -184,11 +184,11 @@
 <section id="education" class="section alt">
   <div class="container">
     <div appReveal>
-      <span class="eyebrow">Education</span>
-      <h2 class="section-title">Where I learned</h2>
+      <span class="eyebrow">{{ t.home.education.eyebrow }}</span>
+      <h2 class="section-title">{{ t.home.education.title }}</h2>
     </div>
     @for (ed of education; track ed.institution) {
-      <article class="card edu" appReveal>
+      <article class="card edu" appReveal="right">
         <div class="edu-icon" aria-hidden="true"><i class="bi bi-mortarboard"></i></div>
         <div class="edu-body">
           <header>
@@ -204,7 +204,7 @@
             }
           </ul>
           @if (ed.grade) {
-            <span class="chip chip-accent">Final grade {{ ed.grade }}</span>
+            <span class="chip chip-accent">{{ t.home.education.finalGrade }} {{ ed.grade }}</span>
           }
         </div>
       </article>
@@ -217,12 +217,12 @@
   <div class="container">
     <div class="cta-band" appReveal>
       <div>
-        <h2>Want a copy for later?</h2>
-        <p>Grab the one-page resume or the full CV as a PDF, or get in touch directly.</p>
+        <h2>{{ t.home.cta.title }}</h2>
+        <p>{{ t.home.cta.text }}</p>
       </div>
       <div class="cta">
         <app-download-menu align="right" />
-        <a routerLink="/contact" class="btn btn-ghost"><i class="bi bi-chat-dots" aria-hidden="true"></i> Contact me</a>
+        <a [routerLink]="i18n.link('/contact')" class="btn btn-ghost"><i class="bi bi-chat-dots" aria-hidden="true"></i> {{ t.home.cta.contact }}</a>
       </div>
     </div>
   </div>

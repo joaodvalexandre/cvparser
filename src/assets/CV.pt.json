@@ -1,0 +1,192 @@
+{
+  "basics": {
+    "name": "João Alexandre",
+    "label": "Programador Full-Stack PHP",
+    "picture": "/assets/pic.jpg",
+    "location": "Lisboa, Portugal",
+    "phone": "+351 962 370 926",
+    "email": "joao.daniel.alexandre43@gmail.com",
+    "summary": "Programador Full-Stack PHP com mais de {{years}} anos de experiência profissional a desenvolver, manter e melhorar aplicações web orientadas para o negócio. Trabalho de ponta a ponta com PHP (Laravel, CodeIgniter), JavaScript, SQL e frontends responsivos, desde o design de bases de dados e APIs de backend até ferramentas internas, automação, testes e deploy. Adapto-me rapidamente a novas bases de código e tecnologias, valorizo a fiabilidade e a facilidade de manutenção, e trabalho de perto com equipas técnicas e de negócio.",
+    "careerStart": "2018-08",
+    "availability": "Disponível para funções remotas ou híbridas de Programador Full-Stack PHP, Laravel, Backend e Web.",
+    "profiles": [
+      { "network": "LinkedIn", "username": "joaodvalexandre", "url": "https://www.linkedin.com/in/joaodvalexandre/", "icon": "linkedin" },
+      { "network": "GitHub", "username": "joaodvalexandre", "url": "https://github.com/joaodvalexandre", "icon": "github" }
+    ]
+  },
+  "skills": {
+    "top": [
+      { "name": "PHP", "level": 8 },
+      { "name": "Laravel", "level": 8 },
+      { "name": "JavaScript", "level": 8 },
+      { "name": "HTML5 / CSS3", "level": 8 },
+      { "name": "SQL / MySQL", "level": 7 }
+    ],
+    "groups": [
+      {
+        "name": "Backend",
+        "items": ["PHP", "Laravel", "CodeIgniter", "Lumen", "CakePHP", "Yii", "Drupal", "APIs REST", "Node.js", "Python", "C#", "Java"]
+      },
+      {
+        "name": "Frontend",
+        "items": ["JavaScript", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Livewire", "jQuery", "Design responsivo"]
+      },
+      {
+        "name": "Dados",
+        "items": ["SQL", "MySQL", "Microsoft SQL Server", "SQLite", "Design de bases de dados", "Otimização de queries", "JSON"]
+      },
+      {
+        "name": "Testes e entrega",
+        "items": ["Git", "GitHub", "GitLab", "Behat", "Testes automatizados", "Testes manuais", "Deploy de aplicações", "Windows Server", "XAMPP", "Documentação técnica"]
+      },
+      {
+        "name": "Ferramentas de IA",
+        "items": ["Claude Code", "GitHub Copilot", "Desenvolvimento assistido por IA"]
+      },
+      {
+        "name": "Formas de trabalho",
+        "items": ["Scrum", "Agile", "Microsoft SharePoint", "Microsoft Teams", "Unity", "Desenvolvimento de jogos"]
+      }
+    ],
+    "soft": [
+      { "name": "Adaptabilidade", "description": "Aprende rapidamente tecnologias e bases de código novas, incluindo Python para manutenção de backend e C# para jogos em Unity." },
+      { "name": "Resolução de problemas", "description": "Analisa problemas complexos, identifica a causa raiz e implementa soluções práticas e fáceis de manter." },
+      { "name": "Pensamento crítico", "description": "Pondera as vantagens e desvantagens técnicas e de produto antes de escolher uma implementação." },
+      { "name": "Sentido de responsabilidade", "description": "Leva funcionalidades desde os requisitos e o design até à implementação, testes, documentação e deploy." },
+      { "name": "Comunicação", "description": "Explica trabalho técnico com clareza a programadores, equipas de negócio, clientes e outras partes interessadas." }
+    ]
+  },
+  "languages": [
+    { "language": "Português", "fluency": "Nativo / Bilingue" },
+    { "language": "Inglês", "fluency": "Nativo / Bilingue" }
+  ],
+  "experience": [
+    {
+      "company": "ACIN",
+      "position": "Programador Web",
+      "start": "2026-05",
+      "end": null,
+      "location": "Lisboa, Portugal",
+      "highlights": [
+        "Desenvolvimento full-stack na aplicação web acingov, com funcionalidades de backend e frontend.",
+        "Desenvolvo e mantenho aplicações web orientadas para o negócio com PHP, CodeIgniter, JavaScript e SQL.",
+        "Contribuo em APIs de backend, design de bases de dados, interfaces de frontend e suporte às aplicações."
+      ],
+      "tools": ["PHP", "CodeIgniter", "JavaScript", "HTML", "CSS", "SQL", "MySQL", "Git"]
+    },
+    {
+      "company": "Grupel S.A.",
+      "position": "Business Developer",
+      "start": "2024-11",
+      "end": "2025-04",
+      "location": "Vagos, Portugal",
+      "highlights": [
+        "Concebi e desenvolvi uma aplicação Laravel completa para requisição de viaturas e gestão interna da frota.",
+        "Automatizei fluxos de trabalho, centralizei dados operacionais e melhorei o controlo de ativos.",
+        "Em paralelo, desenvolvi uma ferramenta de gestão de compras e aprovisionamento, com foco em escalabilidade, segurança, facilidade de manutenção e usabilidade administrativa."
+      ],
+      "tools": ["PHP", "Laravel", "Livewire", "Tailwind CSS", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL"]
+    },
+    {
+      "company": "RedOcean",
+      "position": "Programador Web PHP",
+      "start": "2024-04",
+      "end": "2024-11",
+      "location": "Portugal",
+      "highlights": [
+        "Desenvolvi e melhorei continuamente aplicações web usadas por autarquias e organizações do setor público.",
+        "Implementei funcionalidades em todo o stack com PHP, Laravel, Yii, JavaScript e SQL.",
+        "Melhorei o desempenho, a fiabilidade, a usabilidade e a facilidade de manutenção das aplicações."
+      ],
+      "tools": ["PHP", "Laravel", "Yii", "JavaScript", "jQuery", "HTML", "CSS", "SQL", "MySQL", "Git"]
+    },
+    {
+      "company": "Synopsys Inc.",
+      "position": "Programador Frontend",
+      "start": "2022-08",
+      "end": "2024-02",
+      "location": "Porto Salvo, Portugal",
+      "highlights": [
+        "Criei novas páginas web de consultoria e de dados com HTML, CSS, JavaScript e jQuery nativos.",
+        "Refatorei código frontend para melhorar a legibilidade, o desempenho e a manutenção a longo prazo.",
+        "Implementei pesquisa e filtros em tabelas de dados, melhorando a forma como os utilizadores consultam a informação.",
+        "Apoiei o backend com Python, executando queries SQL e devolvendo JSON aos componentes de frontend.",
+        "Escrevi documentação técnica para páginas web destinadas a clientes."
+      ],
+      "tools": ["HTML5", "CSS3", "JavaScript", "jQuery", "SQL", "Python", "JSON", "Microsoft Office"]
+    },
+    {
+      "company": "NTT DATA Services",
+      "position": "Consultor Assistente",
+      "start": "2021-02",
+      "end": "2022-08",
+      "location": "Lisboa, Portugal",
+      "highlights": [
+        "Contribuí para um website interno em Drupal da EDP para gerir e publicar notícias corporativas.",
+        "Desenvolvi e mantive páginas SharePoint integradas com o Microsoft Teams para uma comunidade virtual interna.",
+        "Implementei cenários de testes automatizados com Behat e realizei testes manuais.",
+        "Mantive documentação técnica no Confluence, criei materiais de onboarding e preparei apresentações mensais para stakeholders."
+      ],
+      "tools": ["PHP", "Drupal", "Behat", "SharePoint", "Microsoft Teams", "Confluence", "Microsoft Office", "Adobe Premiere Pro"]
+    },
+    {
+      "company": "Eugster Frismag AG",
+      "position": "Programador Full-Stack",
+      "start": "2018-08",
+      "end": "2021-01",
+      "location": "Torres Vedras, Portugal",
+      "highlights": [
+        "Desenvolvi e mantive aplicações web internas usadas em ambiente de produção.",
+        "Implementei novas funcionalidades, melhorei software existente e respondi a incidentes nas aplicações.",
+        "Configurei um ambiente Windows Server (XAMPP) e melhorei os processos de deploy com Git e SourceTree.",
+        "Dei formações e apresentações técnicas a equipas de desenvolvimento e de negócio."
+      ],
+      "tools": ["PHP", "Laravel", "Lumen", "CakePHP", "JavaScript", "jQuery", "HTML", "CSS", "Microsoft SQL Server", "MySQL", "Git", "SourceTree", "XAMPP", "Windows Server"]
+    },
+    {
+      "company": "Suntransfers.com",
+      "position": "Estagiário Programador Full-Stack",
+      "internship": true,
+      "start": "2017-05",
+      "end": "2017-07",
+      "location": "Barcelona, Espanha",
+      "highlights": [
+        "Estágio Erasmus a desenvolver novas funcionalidades para ferramentas de administração internas e plataformas web públicas.",
+        "Trabalhei com Yii, Behat e Twig numa equipa de desenvolvimento internacional."
+      ],
+      "tools": ["PHP", "Yii", "Behat", "Twig", "HTML", "CSS"]
+    },
+    {
+      "company": "Eugster Frismag AG",
+      "position": "Estagiário Programador Full-Stack",
+      "internship": true,
+      "start": "2016-05",
+      "end": "2016-07",
+      "location": "Torres Vedras, Portugal",
+      "highlights": [
+        "Ganhei experiência prática com CakePHP, PHP, JavaScript, jQuery, HTML e CSS.",
+        "O bom desempenho resultou numa proposta de trabalho a tempo inteiro após terminar o curso."
+      ],
+      "tools": ["PHP", "CakePHP", "JavaScript", "jQuery", "HTML", "CSS", "NetBeans"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Escola Secundária Henriques Nogueira",
+      "area": "Programação de Sistemas Informáticos",
+      "studyType": "Ensino secundário técnico",
+      "start": "2014-09",
+      "end": "2018-07",
+      "grade": "14/20",
+      "highlights": [
+        "Desenvolvimento de software, programação, bases de dados e tecnologias web: Java, PHP, JavaScript, HTML, CSS, SQL e SQLite.",
+        "Projeto final: um jogo em Unity, programado em C#."
+      ]
+    }
+  ],
+  "github": {
+    "username": "joaodvalexandre",
+    "includeForks": false,
+    "exclude": []
+  }
+}

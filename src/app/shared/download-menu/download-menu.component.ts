@@ -1,9 +1,11 @@
-import { Component, ElementRef, inject, input, signal } from '@angular/core';
+import { Component, ElementRef, computed, inject, input, signal } from '@angular/core';
 import { PdfDownloadService } from '../../core/pdf/pdf-download.service';
+import { I18nService } from '../../core/i18n.service';
 import type { PdfVariant } from '../../core/pdf/cv-pdf.builder';
 
 /**
- * "Download CV" button with a small menu: full CV or one-page resume (both PDF, generated client-side).
+ * "Download CV" button with a small menu: one-page resume or full CV (both PDF, generated
+ * client-side in the current page language).
  *
  *   <app-download-menu />                     primary button (hero, CTA)
  *   <app-download-menu appearance="ghost" />  outlined button
@@ -21,17 +23,21 @@ import type { PdfVariant } from '../../core/pdf/cv-pdf.builder';
 export class DownloadMenuComponent {
   readonly appearance = input<'primary' | 'ghost'>('primary');
   readonly compact = input(false);
-  /** Open the menu upwards / aligned right. */
+  /** Align the menu to the button's left or right edge. */
   readonly align = input<'left' | 'right'>('left');
 
   protected readonly pdf = inject(PdfDownloadService);
+  protected readonly i18n = inject(I18nService);
   protected readonly open = signal(false);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  protected readonly options: { variant: PdfVariant; title: string; detail: string; icon: string }[] = [
-    { variant: 'resume', title: 'Resume', detail: 'One page, the essentials', icon: 'bi-file-earmark-text' },
-    { variant: 'cv', title: 'Full CV', detail: 'Complete history, 2 pages', icon: 'bi-file-earmark-richtext' },
-  ];
+  protected readonly options = computed<{ variant: PdfVariant; title: string; detail: string; icon: string }[]>(() => {
+    const t = this.i18n.t().download;
+    return [
+      { variant: 'resume', title: t.resume, detail: t.resumeDetail, icon: 'bi-file-earmark-text' },
+      { variant: 'cv', title: t.cv, detail: t.cvDetail, icon: 'bi-file-earmark-richtext' },
+    ];
+  });
 
   toggle(): void {
     this.open.update(v => !v);

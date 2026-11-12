@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/", "has": [{ "type": "cookie", "key": "lang", "value": "en" }], "destination": "/home", "permanent": false },
+    { "source": "/", "has": [{ "type": "cookie", "key": "lang", "value": "pt" }], "destination": "/pt/home", "permanent": false },
+    { "source": "/", "missing": [{ "type": "cookie", "key": "lang" }], "has": [{ "type": "header", "key": "accept-language", "value": "pt.*" }], "destination": "/pt/home", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.csr.html" }
   ]

@@ -104,6 +104,33 @@ nav a.active::after {
   gap: 6px;
 }
 
+.lang {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.lang a {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+
+.lang a:hover {
+  color: var(--text);
+}
+
+.lang a.active {
+  background: var(--text);
+  color: var(--bg);
+}
+
 .theme-toggle i {
   font-size: 1.05rem;
 }

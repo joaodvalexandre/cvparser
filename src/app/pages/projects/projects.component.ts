@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { GithubService, LANGUAGE_COLORS, Repo } from '../../core/github.service';
 import { timeAgo } from '../../core/date.utils';
+import { I18nService } from '../../core/i18n.service';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 @Component({
@@ -11,7 +12,12 @@ import { RevealDirective } from '../../shared/reveal.directive';
 })
 export class ProjectsComponent {
   protected readonly github = inject(GithubService);
-  protected readonly filter = signal<string>('All');
+  private readonly i18n = inject(I18nService);
+  private readonly lang = this.i18n.lang();
+  protected readonly t = this.i18n.t().projects;
+
+  /** `null` = all languages. */
+  protected readonly filter = signal<string | null>(null);
   protected readonly skeletons = Array.from({ length: 6 }, (_, i) => i);
 
   protected readonly repos = computed<Repo[]>(() => {
@@ -21,7 +27,7 @@ export class ProjectsComponent {
 
   protected readonly errorMessage = computed(() => {
     const s = this.github.state();
-    return s.status === 'error' ? s.message : '';
+    return s.status === 'error' ? this.t.errors[s.reason] : '';
   });
 
   /** Languages present, most common first. */
@@ -30,12 +36,12 @@ export class ProjectsComponent {
     for (const r of this.repos()) {
       if (r.language) counts.set(r.language, (counts.get(r.language) ?? 0) + 1);
     }
-    return ['All', ...[...counts.entries()].sort((a, b) => b[1] - a[1]).map(([l]) => l)];
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([l]) => l);
   });
 
   protected readonly visible = computed(() => {
     const f = this.filter();
-    return f === 'All' ? this.repos() : this.repos().filter(r => r.language === f);
+    return f === null ? this.repos() : this.repos().filter(r => r.language === f);
   });
 
   constructor() {
@@ -47,7 +53,7 @@ export class ProjectsComponent {
   }
 
   protected ago(iso: string): string {
-    return timeAgo(iso);
+    return timeAgo(iso, this.lang);
   }
 
   /** Turns `mksm-ps2-recomp` into `Mksm ps2 recomp` for a friendlier title. */

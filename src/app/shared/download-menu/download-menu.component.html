@@ -12,12 +12,12 @@
   } @else {
     <i class="bi bi-download" aria-hidden="true"></i>
   }
-  <span>{{ compact() ? 'CV' : 'Download CV' }}</span>
+  <span>{{ compact() ? i18n.t().download.short : i18n.t().download.button }}</span>
   <i class="bi bi-chevron-down caret" aria-hidden="true"></i>
 </button>
 
 <div class="menu" role="menu" [class.open]="open()" [class.right]="align() === 'right'">
-  @for (opt of options; track opt.variant) {
+  @for (opt of options(); track opt.variant) {
     <button type="button" role="menuitem" class="item" [disabled]="!!pdf.busy()" (click)="choose(opt.variant)">
       <span class="item-icon"><i class="bi {{ opt.icon }}" aria-hidden="true"></i></span>
       <span class="item-text">
@@ -25,11 +25,11 @@
         <small>{{ opt.detail }}</small>
       </span>
       @if (pdf.busy() === opt.variant) {
-        <span class="spinner" aria-label="Generating"></span>
+        <span class="spinner" [attr.aria-label]="i18n.t().download.generating"></span>
       }
     </button>
   }
-  @if (pdf.error(); as err) {
-    <p class="error" role="alert">{{ err }}</p>
+  @if (pdf.failed()) {
+    <p class="error" role="alert">{{ i18n.t().download.error }}</p>
   }
 </div>

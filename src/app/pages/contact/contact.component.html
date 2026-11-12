@@ -1,25 +1,25 @@
 <section class="section page">
   <div class="container layout">
     <header class="head">
-      <span class="eyebrow enter" style="--i: 0">Contact</span>
-      <h1 class="enter" style="--i: 1">Let's talk</h1>
-      <p class="muted enter" style="--i: 2">{{ basics.availability }} The quickest way to reach me is by email.</p>
+      <span class="eyebrow enter" style="--i: 0">{{ t.eyebrow }}</span>
+      <h1 class="enter" style="--i: 1">{{ t.title }}</h1>
+      <p class="muted enter" style="--i: 2">{{ basics.availability }} {{ t.quickest }}</p>
       <div class="cta enter" style="--i: 3">
-        <a class="btn btn-primary" href="mailto:{{ basics.email }}"><i class="bi bi-send" aria-hidden="true"></i> Send an email</a>
+        <a class="btn btn-primary" href="mailto:{{ basics.email }}"><i class="bi bi-send" aria-hidden="true"></i> {{ t.sendEmail }}</a>
         <app-download-menu appearance="ghost" />
       </div>
     </header>
 
     <ul class="list">
       @for (item of items; track item.label; let i = $index) {
-        <li class="card item" appReveal [style.--i]="i">
+        <li class="card item" appReveal="right" [style.--i]="i">
           <span class="icon" aria-hidden="true"><i class="bi bi-{{ item.icon }}"></i></span>
           <a class="text" [href]="item.href" [attr.target]="item.external ? '_blank' : null" [attr.rel]="item.external ? 'noopener' : null">
             <small>{{ item.label }}</small>
             <span>{{ item.value }}</span>
           </a>
           @if (item.copy) {
-            <button type="button" class="btn btn-icon" (click)="copy(item)" [attr.aria-label]="'Copy ' + item.label">
+            <button type="button" class="btn btn-icon" (click)="copy(item)" [attr.aria-label]="t.copy(item.label)">
               <i class="bi" [class.bi-check2]="copied() === item.label" [class.bi-copy]="copied() !== item.label" aria-hidden="true"></i>
             </button>
           } @else {
@@ -30,6 +30,8 @@
     </ul>
   </div>
   <p class="toast" role="status" [class.show]="copied()">
-    <i class="bi bi-check2-circle" aria-hidden="true"></i> {{ copied() }} copied to clipboard
+    @if (copied(); as label) {
+      <i class="bi bi-check2-circle" aria-hidden="true"></i> {{ t.copied(label) }}
+    }
   </p>
 </section>
